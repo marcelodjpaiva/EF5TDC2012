@@ -16,5 +16,14 @@ namespace AgendaTDC2012
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var ctx = new ContextoAgenda() )
+            {
+                ctx.Contatos.Add(new Agenda.Dominio.Contato { Nome = "TESTE"});
+                ctx.SaveChanges();               
+            }
+        }
     }
 }

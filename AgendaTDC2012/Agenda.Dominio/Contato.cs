@@ -8,16 +8,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Agenda.Dominio
 {
-    [Table("Pessoas")]
+    [Table("Contatos")]
     public class Contato
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id { get; set; }
+
         [StringLength(50)]
-        public string Nome { get; set; }
+        public virtual string Nome { get; set; }
 
         [StringLength(100)]
-        public string Endereco { get; set; }
+        public virtual string Endereco { get; set; }
 
         [StringLength(20)]
-        public string Telefone { get; set; }
+        public virtual string Telefone { get; set; }
+
+        public virtual ICollection<Anotacao> Anotacoes { get; set; }
     }
 }
