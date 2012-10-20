@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AgendaTDC2012Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AgendaTDC2012ModelStoreContainer">
+          <EntitySet Name="Anotacoes" EntityType="AgendaTDC2012Model.Store.Anotacoes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Contatos" EntityType="AgendaTDC2012Model.Store.Contatos" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_dbo_Anotacoes_dbo_Contatos_Contato_Id" Association="AgendaTDC2012Model.Store.FK_dbo_Anotacoes_dbo_Contatos_Contato_Id">
+            <End Role="Contatos" EntitySet="Contatos" />
+            <End Role="Anotacoes" EntitySet="Anotacoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Anotacoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nota" Type="nvarchar" MaxLength="250" />
+          <Property Name="Contato_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Contatos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" />
+          <Property Name="Endereco" Type="nvarchar" MaxLength="100" />
+          <Property Name="Telefone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Anotacoes_dbo_Contatos_Contato_Id">
+          <End Role="Contatos" Type="AgendaTDC2012Model.Store.Contatos" Multiplicity="0..1" />
+          <End Role="Anotacoes" Type="AgendaTDC2012Model.Store.Anotacoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contatos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Anotacoes">
+              <PropertyRef Name="Contato_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgendaTDC2012Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AgendaTDC2012Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Anotacoes" EntityType="AgendaTDC2012Model.Anotaco" />
+          <EntitySet Name="Contatos" EntityType="AgendaTDC2012Model.Contato" />
+          <AssociationSet Name="FK_dbo_Anotacoes_dbo_Contatos_Contato_Id" Association="AgendaTDC2012Model.FK_dbo_Anotacoes_dbo_Contatos_Contato_Id">
+            <End Role="Contatos" EntitySet="Contatos" />
+            <End Role="Anotacoes" EntitySet="Anotacoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Anotaco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nota" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Contato_Id" Type="Int32" />
+          <NavigationProperty Name="Contato" Relationship="AgendaTDC2012Model.FK_dbo_Anotacoes_dbo_Contatos_Contato_Id" FromRole="Anotacoes" ToRole="Contatos" />
+        </EntityType>
+        <EntityType Name="Contato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Endereco" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Telefone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Anotacoes" Relationship="AgendaTDC2012Model.FK_dbo_Anotacoes_dbo_Contatos_Contato_Id" FromRole="Contatos" ToRole="Anotacoes" />
+        </EntityType>
+        <Association Name="FK_dbo_Anotacoes_dbo_Contatos_Contato_Id">
+          <End Role="Contatos" Type="AgendaTDC2012Model.Contato" Multiplicity="0..1" />
+          <End Role="Anotacoes" Type="AgendaTDC2012Model.Anotaco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contatos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Anotacoes">
+              <PropertyRef Name="Contato_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AgendaTDC2012ModelStoreContainer" CdmEntityContainer="AgendaTDC2012Entities">
+          <EntitySetMapping Name="Anotacoes">
+            <EntityTypeMapping TypeName="AgendaTDC2012Model.Anotaco">
+              <MappingFragment StoreEntitySet="Anotacoes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Contato_Id" ColumnName="Contato_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contatos">
+            <EntityTypeMapping TypeName="AgendaTDC2012Model.Contato">
+              <MappingFragment StoreEntitySet="Contatos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
