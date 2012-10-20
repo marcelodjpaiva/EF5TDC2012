@@ -21,7 +21,18 @@ namespace AgendaTDC2012
         {
             using (var ctx = new ContextoAgenda())
             {
-                ctx.Contatos.Add(new Agenda.Dominio.Contato { Nome = "TESTE"});
+                var contato = new Agenda.Dominio.Contato
+                    {
+                        Nome = "José da Silva",
+                        Endereco = "Endereço teste",
+                        Tipo = Agenda.Dominio.TipoContato.PessoaFisica,
+                        Telefone = "62 111-1212312"
+                    };
+
+                var anotacao = new Agenda.Dominio.Anotacao { Nota = "Anotação teste", Contato = contato };
+
+                ctx.Contatos.Add(contato);
+                ctx.Anotacoes.Add(anotacao);
                 ctx.SaveChanges();               
             }
         }

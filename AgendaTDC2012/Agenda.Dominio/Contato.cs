@@ -8,6 +8,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Agenda.Dominio
 {
+    public enum TipoContato
+    {
+        PessoaFisica,
+        PessoaJuridica
+    }
+
     [Table("Contatos")]
     public class Contato
     {
@@ -23,6 +29,8 @@ namespace Agenda.Dominio
 
         [StringLength(20)]
         public virtual string Telefone { get; set; }
+
+        public virtual TipoContato Tipo { get; set; }
 
         public virtual ICollection<Anotacao> Anotacoes { get; set; }
     }
