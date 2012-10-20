@@ -33,5 +33,7 @@ namespace Agenda.Dominio
         public virtual TipoContato Tipo { get; set; }
 
         public virtual ICollection<Anotacao> Anotacoes { get; set; }
+
+        public virtual string NomeMae { get; set; }
     }
 }

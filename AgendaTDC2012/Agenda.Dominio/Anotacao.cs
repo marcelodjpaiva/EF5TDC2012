@@ -19,6 +19,8 @@ namespace Agenda.Dominio
         [StringLength(250)]
         public virtual string Nota { get; set; }
 
+        public virtual DateTime? Data { get; set; }
+
         public virtual Contato Contato { get; set; }
 
     }

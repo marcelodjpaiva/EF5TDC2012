@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaTDC2012.Migrations;
 
 namespace AgendaTDC2012
 {
@@ -21,6 +23,8 @@ namespace AgendaTDC2012
         {
             using (var ctx = new ContextoAgenda())
             {
+                Database.SetInitializer(new MigrateDatabaseToLatestVersion<ContextoAgenda, Configuration>());
+
                 var contato = new Agenda.Dominio.Contato
                     {
                         Nome = "José da Silva",

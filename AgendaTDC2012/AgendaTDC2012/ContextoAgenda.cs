@@ -10,7 +10,7 @@ namespace AgendaTDC2012
     public class ContextoAgenda : DbContext
     {
         public ContextoAgenda() : base("conexao")
-        {            
+        {
         }
 
         public DbSet<Agenda.Dominio.Contato> Contatos { get; set; }
